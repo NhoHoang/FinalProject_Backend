@@ -8,31 +8,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vti.exam.entity.Post;
-import com.vti.exam.service.IPostService;
+import com.vti.exam.entity.Donator;
+import com.vti.exam.service.IDonatorService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping(value = "/api/v1/post")
+@RequestMapping(value = "/api/v1/donator")
 @Validated
-public class PostController {
+public class DonatorController {
 
 	@Autowired
-	private IPostService service;
+	private IDonatorService service;
 
 	@GetMapping()
 	public ResponseEntity<?> getAllPost() {
-		ArrayList<Post> entities = service.getAllPost();
+		ArrayList<Donator> entities = service.getAllDonator();
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> getPostByID(@PathVariable(name = "id") int id) {
-		return new ResponseEntity<>(service.getPostByID(id), HttpStatus.OK);
-	}
-
+	
 }

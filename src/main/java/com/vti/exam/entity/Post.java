@@ -1,12 +1,20 @@
 package com.vti.exam.entity;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,16 +42,22 @@ public class Post implements Serializable {
 	@Column(name = "`img_2`", length = 500)
 	private String img_2;
 
-//	@Column(name = "`donator_quantity`")
+	@Column(name = "`donator_quantity`")
 	private String donator_quantity;
 
-//	@Column(name = "`money_achieved`")
+	@Column(name = "`money_achieved`")
 	private String money_achieved;
 
 	private String startDate;
 
 	private String finishDate;
 
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
+	@ManyToMany
+	@JoinTable(name = "Donator_Post", joinColumns = @JoinColumn(name = "postID"), inverseJoinColumns = @JoinColumn(name = "donatorID"))
+	private List<Donator> donator;
+
+	// -----------------------------contructor-------------------------------------
 	public Post(int id, String title, String content_1, String content_2, String img_1, String img_2,
 			String donator_quantity, String money_achieved, String startDate, String finishDate) {
 		super();
@@ -72,6 +86,7 @@ public class Post implements Serializable {
 		this.img_2 = img_2;
 	}
 
+	// ----------------------------- getter & setter-----------------------------
 	public int getId() {
 		return id;
 	}
@@ -154,6 +169,14 @@ public class Post implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public List<Donator> getDonator() {
+		return donator;
+	}
+
+	public void setDonator(List<Donator> donator) {
+		this.donator = donator;
 	}
 
 }

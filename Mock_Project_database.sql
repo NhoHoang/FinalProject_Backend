@@ -18,20 +18,6 @@ CREATE TABLE IF NOT EXISTS `User` (
     `avatarUrl`		VARCHAR(500)
 );
 
-
--- Create table Donator
-DROP TABLE IF EXISTS 	`Donator`;
-CREATE TABLE IF NOT EXISTS `Donator` ( 	
-	`id` 				SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	`phone` 			VARCHAR(50) NOT NULL UNIQUE,
-    `fullName` 			VARCHAR(50) NOT NULL,
-    `email` 			CHAR(50) NOT NULL UNIQUE CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
-    `address` 			VARCHAR(800) ,
-	`donation_amount` 	INT ,
-    `message` 			VARCHAR(1000) ,
-    `post_id` 			SMALLINT
-);
-
 -- Create table Post
 DROP TABLE IF EXISTS 	`Post`;
 CREATE TABLE IF NOT EXISTS `Post` ( 	
@@ -46,18 +32,37 @@ CREATE TABLE IF NOT EXISTS `Post` (
     `startDate` 		DATETIME NOT NULL,
     `finishDate` 		DATETIME NOT NULL
 );
+-- Create table Donator
+DROP TABLE IF EXISTS 	`Donator`;
+CREATE TABLE IF NOT EXISTS `Donator` ( 	
+	`id` 				SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	`phone` 			VARCHAR(50) NOT NULL UNIQUE,
+    `fullName` 			VARCHAR(50) NOT NULL,
+    `email` 			CHAR(50) NOT NULL UNIQUE CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
+    `address` 			VARCHAR(800) ,
+	-- `donation_amount` 	INT ,
+    `message` 			VARCHAR(1000) 
+   --  `post_id` 			SMALLINT UNSIGNED,
+
+    --  FOREIGN KEY (post_id) REFERENCES Post(id)
+    
+);
 
 
--- Create table Donator_Post
 DROP TABLE IF EXISTS 	`Donator_Post`;
 CREATE TABLE IF NOT EXISTS `Donator_Post` ( 	
 	`donatorID`			SMALLINT UNSIGNED,
 	`postID`			SMALLINT UNSIGNED,
+	-- `phone`				VARCHAR(50) NOT NULL ,
     `total_money` 		SMALLINT ,
     
-    FOREIGN KEY (donatorID) REFERENCES Donator(id),
+    FOREIGN KEY (donatorID) REFERENCES Donator(id) ON UPDATE CASCADE ,
+-- 	FOREIGN KEY (phone) REFERENCES Donator(phone) ON UPDATE CASCADE ,
     FOREIGN KEY (postID) REFERENCES Post(id)
 );
+
+
+
 
 -- Create table Registration_User_Token
 DROP TABLE IF EXISTS 	`Registration_User_Token`;
@@ -122,18 +127,31 @@ UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '1
    
    
    -- insert data Donator
-INSERT INTO `Donator` 	(`phone`,			`email`,						`address`,			`fullName`,	 		`donation_amount`, 			`message`,  		`post_id`)
-VALUE					('0986565656',		'hanhhanoi1999@gmail.com',		'Ha Nam',			'Hà Thị Nội',			'1500',				'xin gui tien2', 			'3'			), 
-						('0126565656',		'abcsa@gmail.com',				'Ha Nam',			'Hà Thị Nội',			'1500',				'xin gui tien1', 			'1'			), 
-                        ('0975565656',		'hanhasda@gmail.com',			'Ha Nam',			'Hà Thị Nội',			'1500',				'xin gui tien23', 			'2'			), 
-                        ('0365565656',		'ongoasd@gmail.com',			'Ha Nam',			'Hà Thị Nội',			'1500',				'xin gui tien4', 			'3'			);
-                                                       
-                 
- -- insert data Donator_Post
+INSERT INTO `Donator` 	(`phone`,			`email`,						`address`,			`fullName`,	 						`message` 		)
+VALUE					('0986565656',		'hanhhanoi1999@gmail.com',		'Ha Nam',			'nguyen Thị Nội',					'xin gui tien2' 						), 
+						('0126565656',		'abcsa@gmail.com',				'Ha Nam',			'Hà van a',							'xin gui tien1'		), 
+                        ('0975565656',		'hanhasda@gmail.com',			'Ha Nam',			'tran trung B',						'xin gui tien23'			), 
+                        ('0365565656',		'ongoasd@gmail.com',			'Ha Nam',			'Hà Thị Phuong',					'xin gui tien4'		);
+      
+      
 INSERT INTO `Donator_Post` 	(`donatorID`,			`postID`,						`total_money`)
 VALUE						('1',						'2',							'10'),
-							('2',						'2',							'30');
-                     
-                     
+							('1',						'1',							'10'),
+							('1',						'3',							'100'),
+                            ('2',						'2',							'10'),
+                            ('2',						'1',							'10'),
+                            ('1',						'4',							'10'),
+							('3',						'1',							'30');
+      
+      
+ --      
+select p.title, dp.donatorid, dp.total_money from 
+post as p
+join 
+donator_post as dp
+on p.id = dp.postid
+where dp.postid = 2
+
+
                      
 				

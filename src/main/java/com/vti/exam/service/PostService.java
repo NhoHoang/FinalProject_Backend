@@ -20,4 +20,9 @@ public class PostService implements IPostService {
 		return (ArrayList<Post>) repository.findAll();
 	}
 
+	@Override
+	public Post getPostByID(int id) {
+		return repository.findById(id).get();
+	}
+
 }
