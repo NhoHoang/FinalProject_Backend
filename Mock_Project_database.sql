@@ -22,38 +22,41 @@ CREATE TABLE IF NOT EXISTS `User` (
 -- Create table Donator
 DROP TABLE IF EXISTS 	`Donator`;
 CREATE TABLE IF NOT EXISTS `Donator` ( 	
-	id 				SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	`phone` 		VARCHAR(50) NOT NULL UNIQUE,
-    `fullName` 		VARCHAR(50) NOT NULL,
-    `email` 		CHAR(50) NOT NULL UNIQUE CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
-    `address` 		VARCHAR(800) ,
+	`id` 				SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	`phone` 			VARCHAR(50) NOT NULL UNIQUE,
+    `fullName` 			VARCHAR(50) NOT NULL,
+    `email` 			CHAR(50) NOT NULL UNIQUE CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
+    `address` 			VARCHAR(800) ,
 	`donation_amount` 	INT ,
-    `message` 		VARCHAR(1000) ,
-    `post_id` 		SMALLINT
+    `message` 			VARCHAR(1000) ,
+    `post_id` 			SMALLINT
 );
 
 -- Create table Post
 DROP TABLE IF EXISTS 	`Post`;
 CREATE TABLE IF NOT EXISTS `Post` ( 	
-	id 				SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	`title` 		VARCHAR(500) NOT NULL UNIQUE,
-    `content_1` 	VARCHAR(1000) NOT NULL,
-    `img_1`			VARCHAR(500),
-    `content_2` 	VARCHAR(1000) NOT NULL,
-	`img_2`			VARCHAR(500),
+	`id`				SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	`title` 			VARCHAR(500) NOT NULL UNIQUE,
+    `content_1` 		VARCHAR(1000) NOT NULL,
+    `img_1`				VARCHAR(500),
+    `content_2` 		VARCHAR(1000) NOT NULL,
+	`img_2`				VARCHAR(500),
 	`donator_quantity` 	SMALLINT ,
     `money_achieved` 	SMALLINT ,
-    `startDate` 	DATETIME NOT NULL,
-    `finishDate` 	DATETIME NOT NULL
+    `startDate` 		DATETIME NOT NULL,
+    `finishDate` 		DATETIME NOT NULL
 );
 
 
 -- Create table Donator_Post
 DROP TABLE IF EXISTS 	`Donator_Post`;
 CREATE TABLE IF NOT EXISTS `Donator_Post` ( 	
-	`id_donator`		SMALLINT ,
-	`id_post`			SMALLINT ,
-    `total_money` 		SMALLINT 
+	`donatorID`			SMALLINT UNSIGNED,
+	`postID`			SMALLINT UNSIGNED,
+    `total_money` 		SMALLINT ,
+    
+    FOREIGN KEY (donatorID) REFERENCES Donator(id),
+    FOREIGN KEY (postID) REFERENCES Post(id)
 );
 
 -- Create table Registration_User_Token
@@ -75,3 +78,62 @@ CREATE TABLE IF NOT EXISTS `Reset_Password_Token` (
 );
 
 
+-- // insert data:
+
+
+
+-- password: 123456
+INSERT INTO `User` 	(`username`,			`email`,						`password`,																	`address`,					`fullName`,	 		`status`, 	`role`,  		`avatarUrl`				)
+VALUE				('hanh.havan@vti',		'hanhhanoi1999@gmail.com',		'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'Hà Nội',				'Hà Văn Hanh',			0, 		'User' 	,		null				), 
+					('thanhhung12@vti',		'hung122112@gmail.com',			'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'Hà Nội',	 			'Nguyễn Thanh Hưng',	0, 		'User' 	,		null				), 
+					('can.tuananh@vti',		'cananh.tuan12@vti.com',		'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'Hà Nội',				'Cấn Tuấn Anh',			0, 		'User' 	,		null				), 
+					('xuanmaivti',			'xuanmai12@gmail.com', 			'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'HHà Nội',				'Nguyễn Xuân Mai',		0, 		'User'	,		null				),
+                    ('duynn03',				'duynn03@gmail.com', 			'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'HHà Nội',				'Duy',					1, 		'Admin'	,		'1613362949329.png'	);
+
+
+-- insert into Post
+
+INSERT INTO `Post` 	(`title`,							`content_1`,							`img_1`, 					
+														`content_2`,							`img_2`,				
+                                                        `donator_quantity`, 				  `money_achieved` , 			
+                                                        `startDate`,						`finishDate` 			)
+VALUE				('title1',							'content1',								'img1',		
+														'content2',								'img2',			
+														null, 									 null 	,		
+														'2009-07-09',							'2009-07-09'				), 
+					('title2',							'content3',								'img3',		
+														'content4',								'img4',			
+														null, 									 null 	,		
+														'2009-07-09',							'2009-07-09'				), 
+					('title3',							'content5',								'img5',		
+														'content6',								'img6',			
+														null, 									 null 	,		
+														'2009-07-09',							'2009-07-09'				), 
+					('title4',							'content7',								'img7',		
+														'content8',								'img8',			
+														null, 									 null 	,		
+														'2009-07-09',							'2009-07-09'				);
+                                                        
+                                                        
+UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '1010' WHERE (`id` = '1');
+UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '10' WHERE (`id` = '2');
+UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '10' WHERE (`id` = '3');
+UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '10' WHERE (`id` = '4');
+   
+   
+   -- insert data Donator
+INSERT INTO `Donator` 	(`phone`,			`email`,						`address`,			`fullName`,	 		`donation_amount`, 			`message`,  		`post_id`)
+VALUE					('0986565656',		'hanhhanoi1999@gmail.com',		'Ha Nam',			'Hà Thị Nội',			'1500',				'xin gui tien2', 			'3'			), 
+						('0126565656',		'abcsa@gmail.com',				'Ha Nam',			'Hà Thị Nội',			'1500',				'xin gui tien1', 			'1'			), 
+                        ('0975565656',		'hanhasda@gmail.com',			'Ha Nam',			'Hà Thị Nội',			'1500',				'xin gui tien23', 			'2'			), 
+                        ('0365565656',		'ongoasd@gmail.com',			'Ha Nam',			'Hà Thị Nội',			'1500',				'xin gui tien4', 			'3'			);
+                                                       
+                 
+ -- insert data Donator_Post
+INSERT INTO `Donator_Post` 	(`donatorID`,			`postID`,						`total_money`)
+VALUE						('1',						'2',							'10'),
+							('2',						'2',							'30');
+                     
+                     
+                     
+				
