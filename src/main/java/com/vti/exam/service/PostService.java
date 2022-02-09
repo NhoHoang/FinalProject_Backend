@@ -3,8 +3,6 @@ package com.vti.exam.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.vti.exam.entity.Post;
@@ -19,7 +17,12 @@ public class PostService implements IPostService {
 	@Override
 	public ArrayList<Post> getAllPost() {
 
-		return (ArrayList) repository.findAll();
+		return (ArrayList<Post>) repository.findAll();
+	}
+
+	@Override
+	public Post getPostByID(int id) {
+		return repository.findById(id).get();
 	}
 
 }

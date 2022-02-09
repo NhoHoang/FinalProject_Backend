@@ -11,4 +11,6 @@ public interface IPostService {
 
 	ArrayList<Post> getAllPost();
 
+	Post getPostByID(int id);
+
 }
