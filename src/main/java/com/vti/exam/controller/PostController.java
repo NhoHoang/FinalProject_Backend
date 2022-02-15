@@ -33,6 +33,7 @@ public class PostController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> getPostByID(@PathVariable(name = "id") int id) {
 		return new ResponseEntity<>(service.getPostByID(id), HttpStatus.OK);
+//change
 	}
 
 }
