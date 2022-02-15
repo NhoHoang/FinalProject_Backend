@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vti.exam.entity.Donator;
+import com.vti.exam.entity.User;
 import com.vti.exam.repository.IDonatorRepository;
 
 @Service
@@ -19,5 +20,7 @@ public class DonatorService implements IDonatorService {
 
 		return (ArrayList<Donator>) repository.findAll();
 	}
-
+	
+	
+	
 }

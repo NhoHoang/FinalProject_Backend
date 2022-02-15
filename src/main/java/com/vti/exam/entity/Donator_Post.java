@@ -34,6 +34,18 @@ public class Donator_Post implements Serializable {
 	@Column(name = "`total_money`")
 	private int total_money;
 
+	@Column(name = "`message`", length = 1000)
+	private String message;
+	
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public Donator getDonator() {
 		return donator;
 	}

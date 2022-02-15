@@ -34,7 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/api/v1/login").anonymous().antMatchers("/api/v1/users/profile")
-				.authenticated().antMatchers("/api/v1/users/**").permitAll().anyRequest().authenticated().and()
+				.authenticated().antMatchers("/api/v1/post/**").permitAll().anyRequest().authenticated().and()
 				.httpBasic().and().cors().and().csrf().disable()
 				.addFilterBefore(new JWTAuthenticationFilter("/api/v1/login", authenticationManager(), service),
 						UsernamePasswordAuthenticationFilter.class)

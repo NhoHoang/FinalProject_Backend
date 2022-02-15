@@ -15,6 +15,17 @@ public class Donator_Post_Key implements Serializable {
 	@Column(name = "postID")
 	int postID;
 
+//	@Column(name = "total_money")
+//	int totalMoney;
+//
+//	public int getTotalMoney() {
+//		return totalMoney;
+//	}
+//
+//	public void setTotalMoney(int totalMoney) {
+//		this.totalMoney = totalMoney;
+//	}
+
 	public int getDonatorID() {
 		return donatorID;
 	}
