@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `Donator` (
 	`phone` 			VARCHAR(50) NOT NULL UNIQUE,
     `fullName` 			VARCHAR(50) NOT NULL,
     `email` 			CHAR(50) NOT NULL UNIQUE CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
-    `address` 			VARCHAR(800) ,
+    `address` 			VARCHAR(800) 
 	-- `donation_amount` 	INT ,
-    `message` 			VARCHAR(1000) 
+   
    --  `post_id` 			SMALLINT UNSIGNED,
 
     --  FOREIGN KEY (post_id) REFERENCES Post(id)
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `Donator_Post` (
 	`postID`			SMALLINT UNSIGNED,
 	-- `phone`				VARCHAR(50) NOT NULL ,
     `total_money` 		SMALLINT ,
-    
+     `message` 			VARCHAR(1000) ,
     FOREIGN KEY (donatorID) REFERENCES Donator(id) ON UPDATE CASCADE ,
 -- 	FOREIGN KEY (phone) REFERENCES Donator(phone) ON UPDATE CASCADE ,
     FOREIGN KEY (postID) REFERENCES Post(id)
@@ -127,21 +127,21 @@ UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '1
    
    
    -- insert data Donator
-INSERT INTO `Donator` 	(`phone`,			`email`,						`address`,			`fullName`,	 						`message` 		)
-VALUE					('0986565656',		'hanhhanoi1999@gmail.com',		'Ha Nam',			'nguyen Thị Nội',					'xin gui tien2' 						), 
-						('0126565656',		'abcsa@gmail.com',				'Ha Nam',			'Hà van a',							'xin gui tien1'		), 
-                        ('0975565656',		'hanhasda@gmail.com',			'Ha Nam',			'tran trung B',						'xin gui tien23'			), 
-                        ('0365565656',		'ongoasd@gmail.com',			'Ha Nam',			'Hà Thị Phuong',					'xin gui tien4'		);
+INSERT INTO `Donator` 	(`phone`,			`email`,						`address`,			`fullName`	 							)
+VALUE					('0986565656',		'hanhhanoi1999@gmail.com',		'Ha Nam',			'nguyen Thị Nội'										), 
+						('0126565656',		'abcsa@gmail.com',				'Ha Nam',			'Hà van a'								), 
+                        ('0975565656',		'hanhasda@gmail.com',			'Ha Nam',			'tran trung B'								), 
+                        ('0365565656',		'ongoasd@gmail.com',			'Ha Nam',			'Hà Thị Phuong'						);
       
       
-INSERT INTO `Donator_Post` 	(`donatorID`,			`postID`,						`total_money`)
-VALUE						('1',						'2',							'10'),
-							('1',						'1',							'10'),
-							('1',						'3',							'100'),
-                            ('2',						'2',							'10'),
-                            ('2',						'1',							'10'),
-                            ('1',						'4',							'10'),
-							('3',						'1',							'30');
+INSERT INTO `Donator_Post` 	(`donatorID`,			`postID`,						`total_money`, `message`)
+VALUE						('1',						'2',							'10', 'xin gui tien2' ),
+							('1',						'1',							'10', 'xin gui tien1'	),
+							('1',						'3',							'100', 'xin gui tien23'),
+                            ('2',						'2',							'10', 'xin gui tien4'	),
+                            ('2',						'1',							'10', 'xin gui tien5'),
+                            ('1',						'4',							'10', 'xin gui tien6'),
+							('3',						'1',							'30', 'xin gui tien7');
       
       
  --      
