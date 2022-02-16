@@ -7,4 +7,6 @@ import com.vti.exam.entity.Donator;
 
 public interface IDonatorRepository extends JpaRepository<Donator, Integer>, JpaSpecificationExecutor<Donator> {
 
+	Donator existsByEmail(String email);
+
 }

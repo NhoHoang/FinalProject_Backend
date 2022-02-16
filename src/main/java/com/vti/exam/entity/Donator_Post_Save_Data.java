@@ -3,33 +3,20 @@ package com.vti.exam.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "`Donator_Post`")
-public class Donator_Post implements Serializable {
+public class Donator_Post_Save_Data implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	Donator_Post_Key id;
+	@Column(name = "donatorID")
+	private int donatorId;
 
-//	@Id
-	@ManyToOne
-	@MapsId("donatorID")
-	@JoinColumn(name = "donatorID")
-	private Donator donator;
-
-//	@Id
-	@ManyToOne
-	@MapsId("postID")
-	@JoinColumn(name = "postID")
-	private Post post;
+	@Column(name = "postID")
+	private int postId;
 
 	@Column(name = "`total_money`")
 	private int total_money;
@@ -37,25 +24,31 @@ public class Donator_Post implements Serializable {
 	@Column(name = "`message`", length = 1000)
 	private String message;
 
+	public Donator_Post_Save_Data(int postId, int total_money, String message) {
+		super();
+		this.postId = postId;
+		this.total_money = total_money;
+		this.message = message;
+	}
 
-	public Donator_Post() {
+	public Donator_Post_Save_Data() {
 		super();
 	}
 
-	public Donator getDonator() {
-		return donator;
+	public int getDonatorId() {
+		return donatorId;
 	}
 
-	public void setDonator(Donator donator) {
-		this.donator = donator;
+	public void setDonatorId(int donatorId) {
+		this.donatorId = donatorId;
 	}
 
-	public Post getPost() {
-		return post;
+	public int getPostId() {
+		return postId;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+	public void setPostId(int postId) {
+		this.postId = postId;
 	}
 
 	public int getTotal_money() {
