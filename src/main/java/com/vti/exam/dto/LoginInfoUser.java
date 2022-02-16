@@ -9,6 +9,8 @@ public class LoginInfoUser {
 	private String email;
 
 	private String fullName;
+	
+	private String address;
 
 	private String role;
 
@@ -68,6 +70,18 @@ public class LoginInfoUser {
 		this.userName = userName;
 		this.email = email;
 		this.fullName = fullName;
+		this.role = role;
+		this.status = status;
+	}
+
+	public LoginInfoUser(String token, String userName, String email, String fullName, String address, String role,
+			String status) {
+		super();
+		this.token = token;
+		this.userName = userName;
+		this.email = email;
+		this.fullName = fullName;
+		this.address = address;
 		this.role = role;
 		this.status = status;
 	}

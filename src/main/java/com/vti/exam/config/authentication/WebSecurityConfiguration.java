@@ -28,15 +28,32 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(service).passwordEncoder(passwordEncoder);
+		auth.
+		userDetailsService(service)
+		.passwordEncoder(passwordEncoder);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/api/v1/login").anonymous().antMatchers("/api/v1/users/profile")
-				.authenticated().antMatchers("/api/v1/post/**").permitAll().anyRequest().authenticated().and()
-				.httpBasic().and().cors().and().csrf().disable()
-				.addFilterBefore(new JWTAuthenticationFilter("/api/v1/login", authenticationManager(), service),
+		http.authorizeRequests()
+		.antMatchers("/api/v1/login")
+		   .anonymous()
+		.antMatchers("/api/v1/users/profile")
+			.authenticated()
+		.antMatchers("/api/v1/post/**")
+		   .permitAll()
+		.anyRequest()
+		   .authenticated()
+		.and()
+		   .httpBasic()
+		.and()
+		   .cors()
+		.and()
+		   .csrf()
+		   .disable()
+		   //khai bao de cho vao filter
+		//.formLogin().usernameParameter("jsdhj").loginPage("/heheheh").failureForwardUrl("/dssd").defaultSuccessUrl("/sdsd").loginProcessingUrl("/udhjshd").failureUrl("/gdkjshhds").and()
+		   .addFilterBefore(new JWTAuthenticationFilter("/api/v1/login", authenticationManager(), service),
 						UsernamePasswordAuthenticationFilter.class)
 				.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
