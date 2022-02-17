@@ -49,9 +49,15 @@ public class Donator implements Serializable {
 
 	}
 
-	public Donator() {
+	
+	public Donator(String phone, String fullName, String email, String address) {
 		super();
+		this.phone = phone;
+		this.fullName = fullName;
+		this.email = email;
+		this.address = address;
 	}
+
 
 	// ----------------------------- getter & setter-----------------------------
 	public int getId() {

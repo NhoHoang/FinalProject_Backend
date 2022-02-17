@@ -23,11 +23,12 @@ public class DonatorController {
 	@Autowired
 	private IDonatorService service;
 
+	
 	@GetMapping()
 	public ResponseEntity<?> getAllPost() {
 		ArrayList<Donator> entities = service.getAllDonator();
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
 	
-	
+
 }

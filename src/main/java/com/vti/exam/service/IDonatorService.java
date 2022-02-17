@@ -8,4 +8,7 @@ public interface IDonatorService {
 
 	ArrayList<Donator> getAllDonator();
 
+	
+	
+
 }
