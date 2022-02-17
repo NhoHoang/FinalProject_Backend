@@ -94,6 +94,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+
 		http
 		.authorizeRequests()
 		.antMatchers("/api/v1/login").anonymous()
@@ -112,6 +113,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.addFilterBefore(
 				new JWTAuthorizationFilter(), 
 				UsernamePasswordAuthenticationFilter.class);
+
 	}
 	
 	@Bean
