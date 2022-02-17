@@ -34,24 +34,23 @@ public class Donator implements Serializable {
 	@Column(name = "`address`", length = 800)
 	private String address;
 
-	
-
 	@ManyToMany(mappedBy = "donator")
 //	(fetch=FetchType.LAZY, mappedBy = "donator", cascade = CascadeType.ALL)
 	private List<Post> post;
 
 	// -----------------------------contructor-------------------------------------
-	public Donator(int id, String phone, String fullName, String email, String address ) {
+
+	public Donator(int id, String phone, String fullName, String email, String address) {
+
 		super();
 		this.id = id;
 		this.phone = phone;
 		this.fullName = fullName;
 		this.email = email;
 		this.address = address;
-		
+
 	}
 
-	
 	public Donator(String phone, String fullName, String email, String address) {
 		super();
 		this.phone = phone;
@@ -59,7 +58,6 @@ public class Donator implements Serializable {
 		this.email = email;
 		this.address = address;
 	}
-
 
 	// ----------------------------- getter & setter-----------------------------
 	public int getId() {
@@ -102,12 +100,9 @@ public class Donator implements Serializable {
 		this.address = address;
 	}
 
-
-
 	public Donator() {
 		super();
 	}
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

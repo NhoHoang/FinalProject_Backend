@@ -33,27 +33,27 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		.antMatchers("/api/v1/login")
-				.anonymous()
-		.antMatchers("/api/v1/users/**")
-				.anonymous()
-		.antMatchers("/api/v1/post/**")
-				.permitAll().anyRequest().authenticated().and()
-				.httpBasic().and().cors().and().csrf().disable()
+
+		http.authorizeRequests().antMatchers("/api/v1/login").anonymous().antMatchers("/api/v1/users/**").anonymous()
+				.antMatchers("/api/v1/post/**").permitAll().anyRequest().authenticated().and().httpBasic().and().cors()
+				.and().csrf().disable()
 				.addFilterBefore(new JWTAuthenticationFilter("/api/v1/login", authenticationManager(), service),
 						UsernamePasswordAuthenticationFilter.class)
 				.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+		http.authorizeRequests().antMatchers("/api/v1/login").anonymous().antMatchers("/api/v1/post/**").anonymous()
+				.antMatchers("/api/v1/users/**").permitAll().anyRequest().authenticated().and().httpBasic().and().cors()
+				.and().csrf().disable()
+				.addFilterBefore(new JWTAuthenticationFilter("/api/v1/login", authenticationManager(), service),
+						UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+
 	}
 
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
-		final CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-		configuration.applyPermitDefaultValues();
-
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
+		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 		return source;
 	}
 }
