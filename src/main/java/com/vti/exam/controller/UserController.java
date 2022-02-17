@@ -30,8 +30,8 @@ public class UserController {
 	@GetMapping(value = "/email/{email}")
 	public ResponseEntity<?> existsUserByEmail(@PathVariable(name = "email") String email) {
 		// get entity
-		//  boolean result = userService.existsUserByEmail(email);
-		com.vti.exam.entity.User result = userService.findUserByEmail(email);
+		boolean result = userService.existsUserByEmail(email);
+
 		// return result
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
@@ -49,7 +49,6 @@ public class UserController {
 	public ResponseEntity<?> createUser(@Valid @RequestBody UserDTO dto) {
 		// create User
 		userService.createUser(dto.toEntity());
-		
 
 		return new ResponseEntity<>("We have sent an email. Please check email to active account!", HttpStatus.OK);
 	}

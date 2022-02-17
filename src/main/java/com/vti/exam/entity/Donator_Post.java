@@ -18,7 +18,7 @@ public class Donator_Post implements Serializable {
 
 	@EmbeddedId
 	Donator_Post_Key id;
-	
+
 //	@Id
 	@ManyToOne
 	@MapsId("donatorID")
@@ -36,8 +36,7 @@ public class Donator_Post implements Serializable {
 
 	@Column(name = "`message`", length = 1000)
 	private String message;
-	
-	
+
 	public String getMessage() {
 		return message;
 	}
