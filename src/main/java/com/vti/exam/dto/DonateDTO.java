@@ -7,6 +7,7 @@ public class DonateDTO {
 	private String email;
 	private String address;
 	private String phone;
+//	private int donatorId;
 	private int postId;
 	private int moneyDonation;
 	private String message;
@@ -52,21 +53,33 @@ public class DonateDTO {
 	public void setMoneyDonation(int moneyDonation) {
 		this.moneyDonation = moneyDonation;
 	}
-	public int getPostId() {
-		return postId;
-	}
-	public void setPostId(int postId) {
-		this.postId = postId;
-	}
+	
 	public String getMessage() {
 		return message;
 	}
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+//	public int getDonatorId() {
+//		return donatorId;
+//	}
+//	public void setDonatorId(int donatorId) {
+//		this.donatorId = donatorId;
+//	}
+	public int getPostId() {
+		return postId;
+	}
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
+	// method toEntity()
 	public Donator toDonaterEntity() {
 		return new Donator(fullname, email,address, phone);
 	}
-	
+//	public Donator_Post_Save_Data toDonatorPostEntity() {
+//		return new Donator_Post_Save_Data(postId, moneyDonation,message);
+//	}
+//	
 	
 }
