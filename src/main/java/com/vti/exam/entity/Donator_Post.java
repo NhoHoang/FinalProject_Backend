@@ -37,6 +37,14 @@ public class Donator_Post implements Serializable {
 	@Column(name = "`message`", length = 1000)
 	private String message;
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public Donator getDonator() {
 		return donator;
 	}
@@ -59,14 +67,6 @@ public class Donator_Post implements Serializable {
 
 	public void setTotal_money(int total_money) {
 		this.total_money = total_money;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public static long getSerialversionuid() {

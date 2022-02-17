@@ -35,6 +35,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+
 		http.authorizeRequests()
 		.antMatchers("/api/v1/login")
 		   .anonymous()
@@ -51,9 +52,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and()
 		   .csrf()
 		   .disable()
+		   
 		   //khai bao de cho vao filter
-		//.formLogin().usernameParameter("jsdhj").loginPage("/heheheh").failureForwardUrl("/dssd").defaultSuccessUrl("/sdsd").loginProcessingUrl("/udhjshd").failureUrl("/gdkjshhds").and()
-		   .addFilterBefore(new JWTAuthenticationFilter("/api/v1/login", authenticationManager(), service),
+		// .formLogin().usernameParameter("jsdhj").loginPage("/heheheh").failureForwardUrl("/dssd").defaultSuccessUrl("/sdsd").loginProcessingUrl("/udhjshd").failureUrl("/gdkjshhds").and()
+		
+				.addFilterBefore(new JWTAuthenticationFilter("/api/v1/login", authenticationManager(), service),
+
 						UsernamePasswordAuthenticationFilter.class)
 				.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
