@@ -38,8 +38,13 @@ public class Donator_Post implements Serializable {
 	private String message;
 
 
-	public Donator_Post() {
-		super();
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+
 	}
 
 	public Donator getDonator() {
