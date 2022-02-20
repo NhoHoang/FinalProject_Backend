@@ -1,2 +1,0 @@
-# FinalProject
-Mock Final Project
