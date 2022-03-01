@@ -35,6 +35,9 @@ public class User implements Serializable {
 	@Column(name = "`address`", nullable = false, length = 800)
 	private String address;
 
+	@Column(name = "`phone`", nullable = false, length = 800)
+	private String phone;
+
 	@Column(name = "`fullName`", nullable = false, length = 50)
 	private String fullName;
 
@@ -75,6 +78,41 @@ public class User implements Serializable {
 		this.fullName = fullName;
 	}
 
+	public User(String userName, String email, String password, String address, String phone, String fullName) {
+		super();
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.phone = phone;
+		this.fullName = fullName;
+	}
+
+	public User(String email, String address, String fullName) {
+		super();
+		this.email = email;
+		this.address = address;
+		this.fullName = fullName;
+	}
+
+	public User(String userName, String email, String fullName, String role, UserStatus status, String avatarUrl) {
+		super();
+		this.userName = userName;
+		this.email = email;
+		this.fullName = fullName;
+		this.role = role;
+		this.status = status;
+		this.avatarUrl = avatarUrl;
+	}
+
+	public User(String email, String address, String phone, String fullName) {
+		super();
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+		this.fullName = fullName;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -89,6 +127,14 @@ public class User implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getEmail() {

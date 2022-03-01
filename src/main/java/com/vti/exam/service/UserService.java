@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vti.exam.dto.ChangePublicProfileDTO;
+import com.vti.exam.dto.UserUpdateDTO;
 import com.vti.exam.entity.RegistrationUserToken;
 import com.vti.exam.entity.ResetPasswordToken;
 import com.vti.exam.entity.User;
@@ -160,6 +162,29 @@ public class UserService implements IUserService {
 
 		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
 				AuthorityUtils.createAuthorityList(user.getRole()));
+	}
+
+	@Override
+	public void changeUserAvatar(String username, ChangePublicProfileDTO dto) {
+		User user = userRepository.findByUserName(username);
+
+		user.setAvatarUrl(dto.getAvatarUrl());
+		userRepository.save(user);
+
+		// TODO other field
+	}
+
+	@Override
+	public void changeUserProfile(String username, UserUpdateDTO dto) {
+		User user = userRepository.findByUserName(username);
+
+		user.setEmail(dto.getEmail());
+		user.setAddress(dto.getAddress());
+		user.setFullName(dto.getFullName());
+		user.setPhone(dto.getPhone());
+		userRepository.save(user);
+
+		// TODO other field
 	}
 
 }

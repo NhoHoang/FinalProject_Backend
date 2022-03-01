@@ -4,6 +4,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.vti.exam.dto.ChangePublicProfileDTO;
+import com.vti.exam.dto.UserUpdateDTO;
 import com.vti.exam.entity.User;
 
 public interface IUserService extends UserDetailsService {
@@ -29,5 +31,9 @@ public interface IUserService extends UserDetailsService {
 	void sendResetPasswordViaEmail(String email);
 
 	UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+
+	void changeUserAvatar(String username, ChangePublicProfileDTO dto);
+
+	void changeUserProfile(String username, UserUpdateDTO dto);
 
 }

@@ -13,6 +13,8 @@ public class UserDTO {
 
 	private String address;
 
+	private String phone;
+
 	// check not null, check length, check format (regex)...
 	private String password;
 
@@ -32,6 +34,14 @@ public class UserDTO {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public void setEmail(String email) {
@@ -63,6 +73,10 @@ public class UserDTO {
 	}
 
 	public User toEntity() {
-		return new User(userName, email, password, address, fullName);
+		return new User(userName, email, password, address, phone, fullName);
+	}
+
+	public User toEntity2() {
+		return new User(email, address, fullName);
 	}
 }

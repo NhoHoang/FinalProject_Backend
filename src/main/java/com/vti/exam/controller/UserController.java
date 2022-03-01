@@ -5,17 +5,23 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vti.exam.dto.ChangePublicProfileDTO;
+import com.vti.exam.dto.ProfileDTO;
 import com.vti.exam.dto.UserDTO;
+import com.vti.exam.dto.UserUpdateDTO;
+import com.vti.exam.entity.User;
 import com.vti.exam.service.IUserService;
 
 @CrossOrigin("*")
@@ -100,6 +106,48 @@ public class UserController {
 		userService.resetPassword(token, newPassword);
 
 		return new ResponseEntity<>("Reset Password success!", HttpStatus.OK);
+	}
+
+	@GetMapping("/profile")
+	// validate: check exists, check not expired
+	public ResponseEntity<?> getUserProfile(Authentication authentication) {
+
+		// get username from token
+		String username = authentication.getName();
+
+		// get user info
+		User user = userService.findUserByUserName(username);
+
+		// convert user entity to user dto
+		ProfileDTO profileDto = new ProfileDTO(user.getUserName(), user.getEmail(), user.getFullName(), user.getRole(),
+				user.getStatus().toString(), user.getAvatarUrl());
+
+		return new ResponseEntity<>(profileDto, HttpStatus.OK);
+	}
+
+	@PutMapping("/image-profile")
+	// validate: check exists, check not expired
+	public ResponseEntity<?> changeUserProfile(Authentication authentication, @RequestBody ChangePublicProfileDTO dto) {
+
+		// get username from token
+		String username = authentication.getName();
+
+		userService.changeUserAvatar(username, dto);
+
+		return new ResponseEntity<>("Change Image Successfully!", HttpStatus.OK);
+	}
+
+	@PutMapping("/infor-profile")
+	// validate: check exists, check not expired
+	public ResponseEntity<?> changeUserProfileInformation(Authentication authentication,
+			@RequestBody UserUpdateDTO dto) {
+
+		// get username from token
+		String username = authentication.getName();
+
+		userService.changeUserProfile(username, dto);
+
+		return new ResponseEntity<>("Change Profile Successfully!", HttpStatus.OK);
 	}
 
 }

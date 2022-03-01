@@ -40,7 +40,9 @@ public class JWTTokenService {
         		user.getUserName(), 
         		user.getEmail(), 
         		user.getFullName(),
+        		user.getPhone(),
         		user.getAddress(),
+        		
         		user.getRole(), 
         		user.getStatus().toString());
         		

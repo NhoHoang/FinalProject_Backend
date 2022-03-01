@@ -10,6 +10,8 @@ public class LoginInfoUser {
 
 	private String fullName;
 
+	private String phone;
+
 	private String address;
 
 	private String role;
@@ -48,6 +50,14 @@ public class LoginInfoUser {
 		this.fullName = fullName;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public String getRole() {
 		return role;
 	}
@@ -72,12 +82,15 @@ public class LoginInfoUser {
 		this.address = address;
 	}
 
-	public LoginInfoUser(String token, String userName, String email, String fullName, String role, String status) {
+	public LoginInfoUser(String token, String userName, String email, String fullName, String phone, String address,
+			String role, String status) {
 		super();
 		this.token = token;
 		this.userName = userName;
 		this.email = email;
 		this.fullName = fullName;
+		this.phone = phone;
+		this.address = address;
 		this.role = role;
 		this.status = status;
 	}

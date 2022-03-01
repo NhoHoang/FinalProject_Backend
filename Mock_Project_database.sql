@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 	`email` 		CHAR(50) NOT NULL UNIQUE  CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
 	`password` 		VARCHAR(800) NOT NULL,
     `address` 		VARCHAR(800) ,
+    `phone` 		VARCHAR(50) NOT NULL UNIQUE,
     `fullName` 		VARCHAR(50) NOT NULL,
     `role` 			ENUM('Admin','User') DEFAULT 'User',
 	`status`		TINYINT DEFAULT 0, -- 0: Not Active, 1: Active
@@ -91,12 +92,12 @@ CREATE TABLE IF NOT EXISTS `Reset_Password_Token` (
 
 
 -- password: 123456
-INSERT INTO `User` 	(`username`,			`email`,						`password`,																	`address`,					`fullName`,	 		`status`, 	`role`,  		`avatarUrl`				)
-VALUE				('hanh.havan@vti',		'hanhhanoi1999@gmail.com',		'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'Hà Nội',				'Hà Văn Hanh',			0, 		'User' 	,		null				), 
-					('thanhhung12@vti',		'hung122112@gmail.com',			'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'Hà Nội',	 			'Nguyễn Thanh Hưng',	0, 		'User' 	,		null				), 
-					('can.tuananh@vti',		'cananh.tuan12@vti.com',		'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'Hà Nội',				'Cấn Tuấn Anh',			0, 		'User' 	,		null				), 
-					('xuanmaivti',			'xuanmai12@gmail.com', 			'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'HHà Nội',				'Nguyễn Xuân Mai',		0, 		'User'	,		null				),
-                    ('duynn03',				'duynn03@gmail.com', 			'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'HHà Nội',				'Duy',					1, 		'Admin'	,		'1613362949329.png'	);
+INSERT INTO `User` 	(`username`,			`email`,						`password`,																	`address`,				`phone`,			`fullName`,	 		`status`, 	`role`,  		`avatarUrl`				)
+VALUE				('hanh.havan@vti',		'hanhhanoi1999@gmail.com',		'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'Hà Nội',				'0331646656',		'Hà Văn Hanh',			0, 		'User' 	,		null				), 
+					('thanhhung12@vti',		'hung122112@gmail.com',			'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'Hà Nội',	 			'0716464656',		'Nguyễn Thanh Hưng',	0, 		'User' 	,		null				), 
+					('can.tuananh@vti',		'cananh.tuan12@vti.com',		'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'Hà Nội',				'06316464656',		'Cấn Tuấn Anh',			0, 		'User' 	,		null				), 
+					('xuanmaivti',			'xuanmai12@gmail.com', 			'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'HHà Nội',				'07556464656',		'Nguyễn Xuân Mai',		0, 		'User'	,		null				),
+                    ('duynn03',				'duynn03@gmail.com', 			'$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi',				'HHà Nội',				'01316464656',		'Duy',					1, 		'Admin'	,		'1613362949329.png'	);
 
 
 -- insert into Post
@@ -235,3 +236,8 @@ UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '12');
 UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '13');
 UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '14');
 
+
+-- Calculate percentage:
+
+SELECT money_achieved, plan_budget , money_achieved*100/plan_budget AS `RATE`
+FROM POST 
