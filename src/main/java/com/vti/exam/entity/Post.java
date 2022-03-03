@@ -72,6 +72,19 @@ public class Post implements Serializable {
 		this.finishDate = finishDate;
 	}
 
+	public Post(String title, String content_1, String content_2, String img_1, String img_2, int planBudget,
+			String startDate, String finishDate) {
+		super();
+		this.title = title;
+		this.content_1 = content_1;
+		this.content_2 = content_2;
+		this.img_1 = img_1;
+		this.img_2 = img_2;
+		this.planBudget = planBudget;
+		this.startDate = startDate;
+		this.finishDate = finishDate;
+	}
+
 	public Post(int id) {
 		super();
 		this.id = id;

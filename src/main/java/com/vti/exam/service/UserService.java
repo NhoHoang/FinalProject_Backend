@@ -1,5 +1,6 @@
 package com.vti.exam.service;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vti.exam.dto.ChangePublicProfileDTO;
 import com.vti.exam.dto.UserUpdateDTO;
+import com.vti.exam.entity.Post;
 import com.vti.exam.entity.RegistrationUserToken;
 import com.vti.exam.entity.ResetPasswordToken;
 import com.vti.exam.entity.User;
@@ -185,6 +187,11 @@ public class UserService implements IUserService {
 		userRepository.save(user);
 
 		// TODO other field
+	}
+
+	@Override
+	public ArrayList<User> getAllUser() {
+		return (ArrayList<User>) userRepository.findAll();
 	}
 
 }

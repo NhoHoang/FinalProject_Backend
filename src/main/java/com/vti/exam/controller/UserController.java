@@ -1,5 +1,7 @@
 package com.vti.exam.controller;
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,19 @@ public class UserController {
 
 	@Autowired
 	private IUserService userService;
+//
+	//
+	// gest list user
+
+	@GetMapping()
+	public ResponseEntity<?> getAllUser() {
+		ArrayList<User> entities = userService.getAllUser();
+		return new ResponseEntity<>(entities, HttpStatus.OK);
+	}
+
+	//
+	//
+	//
 
 	@GetMapping(value = "/email/{email}")
 	public ResponseEntity<?> existsUserByEmail(@PathVariable(name = "email") String email) {
@@ -50,6 +65,11 @@ public class UserController {
 		// return result
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
+	//
+// tạo user
+	//
+	//
+	//
 
 	@PostMapping()
 	public ResponseEntity<?> createUser(@Valid @RequestBody UserDTO dto) {
@@ -58,6 +78,11 @@ public class UserController {
 
 		return new ResponseEntity<>("We have sent an email. Please check email to active account!", HttpStatus.OK);
 	}
+
+	//
+	//
+	//
+	//
 
 	@GetMapping("/activeUser")
 	// validate: check exists, check not expired

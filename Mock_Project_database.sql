@@ -28,12 +28,12 @@ CREATE TABLE IF NOT EXISTS `Post` (
     `img_1`				VARCHAR(500),
     `content_2` 		VARCHAR(6000) NOT NULL,
 	`img_2`				VARCHAR(500),
-	`donator_quantity` 	SMALLINT ,
-    `money_achieved` 	INT ,
-	`plan_budget` 		INT ,
+	`donator_quantity` 	SMALLINT default 0,
+    `money_achieved` 	INT default 0,
+	`plan_budget` 		INT default 0,
      `rate` 			float ,
-    `startDate` 		DATETIME NOT NULL,
-    `finishDate` 		DATETIME NOT NULL
+    `startDate` 		DATETIME ,
+    `finishDate` 		DATETIME 
 );
 -- Create table Donator
 DROP TABLE IF EXISTS 	`Donator`;
@@ -240,4 +240,4 @@ UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '14');
 -- Calculate percentage:
 
 SELECT money_achieved, plan_budget , money_achieved*100/plan_budget AS `RATE`
-FROM POST 
+FROM POST ;
